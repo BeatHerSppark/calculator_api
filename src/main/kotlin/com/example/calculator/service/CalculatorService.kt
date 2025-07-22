@@ -13,14 +13,11 @@ class CalculatorService {
             val ch = expr[i]
             when {
                 ch.isWhitespace() -> i++
-
                 ch == '=' -> throw IllegalArgumentException("Don't use '=' in the expression")
-
                 ch in "+*/()" -> {
                     tokens.add(ch.toString())
                     i++
                 }
-
                 ch == '-' -> {
                     if (tokens.isEmpty() || tokens.last() in "+-*/(") {
                         tokens.add("0")
@@ -28,7 +25,6 @@ class CalculatorService {
                     tokens.add("-")
                     i++
                 }
-
                 ch.isDigit() || ch == '.' -> {
                     val start = i
                     while (i < expr.length && (expr[i].isDigit() || expr[i] == '.')) {
@@ -36,7 +32,6 @@ class CalculatorService {
                     }
                     tokens.add(expr.substring(start, i))
                 }
-
                 else -> throw IllegalArgumentException("Invalid character: $ch")
             }
         }
